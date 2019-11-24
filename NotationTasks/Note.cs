@@ -4,7 +4,7 @@ namespace NotationTasks
 {
     public class Note
     {
-        private bool needConsole = true;
+        private bool needConsole = false;
         private double referenceNoteFreq = 440;
         private double referenceNote = 49;
         private int accuracy = 2; 
@@ -19,15 +19,15 @@ namespace NotationTasks
         public void Init()
         {
             needInit = false;
-            for (int i=0; i<freqTable.Length; i++)
+            for (int i=1; i<freqTable.Length; i++)
             {
                 if (accuracy > 6)
                 {
-                    freqTable[i] = Math.Pow(2, ((i-1 - referenceNote) / 12)) * referenceNoteFreq;
+                    freqTable[i] = Math.Pow(2, ((i - referenceNote + 1) / 12)) * referenceNoteFreq;
                 }
                 else
                 {
-                    freqTable[i] = Math.Round(Math.Pow(2, ((i - referenceNote) / 12)) * referenceNoteFreq, accuracy);
+                    freqTable[i] = Math.Round(Math.Pow(2, ((i - referenceNote + 1) / 12)) * referenceNoteFreq, accuracy);
                 }
                 if (needConsole == true) Console.WriteLine("freqTable[" + i + "] ("+GetNoteName(i,0) +") = " + freqTable[i]);
             }
@@ -86,7 +86,7 @@ namespace NotationTasks
             else
             {
                 if (needConsole == true) Console.WriteLine("GetNoteName(" + noteNumber + ") = " + (noteNameTableSharps[noteNumber % 12]) + (noteNumber / 12));
-                return (noteNameTableSharps[noteNumber % 12]) + (noteNumber / 12);
+                return ((noteNameTableSharps[noteNumber % 12]) + (noteNumber / 12));
             }
         }
     }

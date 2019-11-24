@@ -2,13 +2,12 @@
 
 namespace NotationTasks
 {
-    class Program
+    class Test
     {
         static void Main(string[] args)
         {
             Note NOTE = new Note();
-            NOTE.GetNoteName(24, 0);
-            Console.WriteLine("Done!");
+            Console.WriteLine(NOTE.GetNoteName(48, 0) + " " + NOTE.GetFreq('a', 0, 4) + " " + NOTE.GetNoteNumber('a', 0, 4));
         }
     }
 }
