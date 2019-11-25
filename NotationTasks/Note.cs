@@ -10,9 +10,8 @@ namespace NotationTasks
         private bool needInit = true;
         private double[] freqTable = new double[88];
         private char[] noteNameTable = new char[7] { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
-        private string[] noteNameTableSharps = new string[12] {"a", "a#", "b", "c", "c#", "d", "d#", "e", "f", "f#",  "g", "g#" };
+        private string[] noteNameTableSharps = new string[12] {"a ", "a#", "b ", "c ", "c#", "d ", "d#", "e ", "f ", "f#",  "g ", "g#" };
         private string[] noteNameTableBemol = new string[12] {"a", "bb", "b", "c", "db", "d", "eb", "e", "f", "gb", "g", "ab" };
-
         private string[] accidentalStringTable = new string[] { "bb", "b", "-" ,"#", "##" };
 
         public void Init()
@@ -30,6 +29,15 @@ namespace NotationTasks
                 }
             }
             
+        }
+
+        public void ShowFreqTable()
+        {
+            if (needInit == true) Init();
+            for (int i = 0; i < freqTable.Length; i++)
+            {
+                Console.WriteLine("freqTable [" + i + "] ["+GetNoteName(i,0)+"] = " + freqTable[i]+" Hz");
+            }
         }
 
         public int GetNoteNumber(char note, int octave, int accidental)
@@ -80,5 +88,6 @@ namespace NotationTasks
                 return ((noteNameTableSharps[noteNumber % 12]) + (noteNumber / 12));
             }
         }
+
     }
 }
