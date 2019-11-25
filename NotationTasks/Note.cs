@@ -4,7 +4,6 @@ namespace NotationTasks
 {
     public class Note
     {
-        private bool needConsole = false;
         private double referenceNoteFreq = 440;
         private double referenceNote = 49;
         private int accuracy = 2; 
@@ -29,10 +28,8 @@ namespace NotationTasks
                 {
                     freqTable[i] = Math.Round(Math.Pow(2, ((i - referenceNote + 1) / 12)) * referenceNoteFreq, accuracy);
                 }
-                if (needConsole == true) Console.WriteLine("freqTable[" + i + "] ("+GetNoteName(i,0) +") = " + freqTable[i]);
             }
             
-            if (needConsole == true) Console.WriteLine("Init() competed");
         }
 
         public int GetNoteNumber(char note, int octave, int accidental)
@@ -41,7 +38,6 @@ namespace NotationTasks
             {
                 if (note == noteNameTable[i])
                 {
-                    if (needConsole == true) Console.WriteLine("GetNoteNumber(name=" + note + ", accidental=" + accidental + ", octave = " + octave + ") = " + (i + 12*octave + accidental));
                     return i + 12 * octave + accidental;
                 }
             }
@@ -51,7 +47,6 @@ namespace NotationTasks
         public double GetFreq(char note, int accidental, int octave)
         {
             if (needInit == true) Init();
-            if (needConsole == true) Console.WriteLine("GetFreq(name=" + note + ", accidental=" + accidental + ", octave = " + octave + ") = " + freqTable[GetNoteNumber(note, octave, accidental)]);
             return freqTable[GetNoteNumber(note, octave, accidental)];
         }
         public double GetFreq(char note, string accidental, int octave)
@@ -69,10 +64,8 @@ namespace NotationTasks
             }
             if (foundAccidentalString == false)
             {
-                if (needConsole == true) Console.WriteLine("accidentalStringTable is usless");
                 accidentalInt = 0;
             }
-            if (needConsole == true) Console.WriteLine("GetFreq(name=" + note + ", accidental=" + accidental + ", octave = " + octave + ") = " + freqTable[GetNoteNumber(note, octave, accidentalInt)]);
             return freqTable[GetNoteNumber(note, octave, accidentalInt)];
         }
         public string GetNoteName(int noteNumber, int accidental)
@@ -80,12 +73,10 @@ namespace NotationTasks
             if (needInit == true) Init();
             if (accidental == -1)
             {
-                if (needConsole == true) Console.WriteLine("GetNoteName(" + noteNumber + ") = " + (noteNameTableBemol[noteNumber % 12]) + (noteNumber / 12));
                 return (noteNameTableBemol[noteNumber % 12]) + (noteNumber / 12);
             }
             else
             {
-                if (needConsole == true) Console.WriteLine("GetNoteName(" + noteNumber + ") = " + (noteNameTableSharps[noteNumber % 12]) + (noteNumber / 12));
                 return ((noteNameTableSharps[noteNumber % 12]) + (noteNumber / 12));
             }
         }
