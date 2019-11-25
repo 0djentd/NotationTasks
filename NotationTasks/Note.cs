@@ -40,7 +40,7 @@ namespace NotationTasks
             }
         }
 
-        public int GetNoteNumber(char note, int octave, int accidental)
+        public int GetNoteNumber(char note, int accidental, int octave)
         {
             for (int i = 0; i<=noteNameTable.Length; i++)
             {
@@ -52,10 +52,15 @@ namespace NotationTasks
             return 0;
         }
 
+        public int StringToNum(string noteString)
+        {
+            return GetNoteNumber(noteString[0], noteString[1]+ noteString[2], noteString[3]);
+        }
+
         public double GetFreq(char note, int accidental, int octave)
         {
             if (needInit == true) Init();
-            return freqTable[GetNoteNumber(note, octave, accidental)];
+            return freqTable[GetNoteNumber(note, accidental, octave)];
         }
         public double GetFreq(char note, string accidental, int octave)
         {
