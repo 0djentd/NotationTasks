@@ -12,7 +12,9 @@ namespace NotationTasks
         private char[] noteNameTable = new char[7] { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
         private string[] noteNameTableSharps = new string[12] {"a ", "a#", "b ", "c ", "c#", "d ", "d#", "e ", "f ", "f#",  "g ", "g#" };
         private string[] noteNameTableBemol = new string[12] {"a", "bb", "b", "c", "db", "d", "eb", "e", "f", "gb", "g", "ab" };
-        private string[] accidentalStringTable = new string[] { "bb", "b", "-" ,"#", "##" };
+        private string[] accidentalStringTable = new string[] { "bb", "b_", "__" ,"#_", "##" };
+
+        // ab_4 a__4
 
         public void Init()
         {
@@ -40,27 +42,41 @@ namespace NotationTasks
             }
         }
 
-        public int GetNoteNumber(char note, int accidental, int octave)
+        public int GetNoteNumber(char note, string accidental, int octave)
         {
             for (int i = 0; i<=noteNameTable.Length; i++)
             {
                 if (note == noteNameTable[i])
                 {
-                    return i + 12 * octave + accidental;
+                    for(int x=1; x<accidentalStringTable.Length; x++)
+                    {
+                        if (accidental == accidentalStringTable[x])
+                        {
+                            int accidentalInt = x - 2;
+                            return i + 12 * octave + accidentalInt;
+                        }
+                    }
+                    return i + 12 * octave;
                 }
             }
             return 0;
         }
+        public int GetNoteNumber(char note, int accidental, int octave)
+        {
+            return GetNoteNumber(note, accidentalStringTable[accidental + 2], octave);
+        }
+
+
 
         public int StringToNum(string noteString)
         {
-            return GetNoteNumber(noteString[0], noteString[1]+ noteString[2], noteString[3]);
+            return GetNoteNumber(noteString[0], noteString.Substring(1,2), noteString[3]);
         }
 
-        public double GetFreq(char note, int accidental, int octave)
+        public double GetFreq(string noteString)
         {
             if (needInit == true) Init();
-            return freqTable[GetNoteNumber(note, accidental, octave)];
+            return freqTable[StringToNum(noteString)];
         }
         public double GetFreq(char note, string accidental, int octave)
         {
@@ -79,7 +95,11 @@ namespace NotationTasks
             {
                 accidentalInt = 0;
             }
-            return freqTable[GetNoteNumber(note, octave, accidentalInt)];
+            return freqTable[GetNoteNumber(note, accidentalInt, octave)];
+        }
+        public double GetFreq(char note, int accidental, int octave)
+        {
+            return GetFreq(note, accidentalStringTable[accidental + 2], octave);
         }
         public string GetNoteName(int noteNumber, int accidental)
         {
@@ -92,6 +112,11 @@ namespace NotationTasks
             {
                 return ((noteNameTableSharps[noteNumber % 12]) + (noteNumber / 12));
             }
+        }
+
+        public int Compare(string note1, string note2)
+        {
+            return (StringToNum(note2) - StringToNum(note2));
         }
 
     }
