@@ -14,8 +14,6 @@ namespace NotationTasks
         private char[] noteNameTableFlat = new char[12] {'a', 'b', 'b', 'c', 'd', 'd', 'e', 'e', 'f', 'g', 'g', 'a' };
         private string[] accidentalsStringTable = new string[] { "bb", "b_", "__" ,"#_", "##" };
 
-        // ab_4 a__4
-
         public void Init()
         {
             needInit = false;
@@ -78,11 +76,13 @@ namespace NotationTasks
             }
             return 0;
         }
+
         public int GetNoteNumber(char note, int accidental, int octave)
         {
             string noteName = note.ToString() + accidentalsStringTable[accidental + 2] + octave;
             return GetNoteNumber(noteName);
         }
+
         public double GetFreq(string noteString)
         {
             if (needInit == true) Init();
