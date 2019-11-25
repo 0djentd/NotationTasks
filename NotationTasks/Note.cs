@@ -86,7 +86,8 @@ namespace NotationTasks
         public double GetFreq(string noteString)
         {
             if (needInit == true) Init();
-            return freqTable
+            return freqTable[GetNoteNumber(noteString)];
+        }
 
     }
 }
