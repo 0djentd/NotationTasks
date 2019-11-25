@@ -6,7 +6,7 @@ namespace NotationTasks
     {
         private double referenceNoteFreq = 440;
         private double referenceNote = 49;
-        private int accuracy = 2; 
+        private int accuracy = 4; 
         private bool needInit = true;
         private double[] freqTable = new double[88];
         private char[] noteNameTable = new char[7] { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
