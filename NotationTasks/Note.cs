@@ -16,9 +16,5 @@ namespace NotationTasks
         public int Duration { get => duration; set => duration = value; }
         public int Tuplet { get => tuplet; set => tuplet = value; }
         public int Articulation { get => articulation; set => articulation = value; }
-        public void Set(int setpitch, int start, int duration, int tuplet)
-        {
-            Pitch()=setpitch;
-        }
     }
 }
