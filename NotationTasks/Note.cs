@@ -1,5 +1,6 @@
 namespace NotationTasks
 {
+    // Base class for notes.
     class Note
     {
         private int pitch;
